@@ -1,11 +1,15 @@
 version:  '3'
 services:
   spark-notebook:
-      image: jupyter/all-spark-notebook
+      image: jupyter/all-spark-notebook:spark-3.2.1
       volumes:
         - ${LOCAL_WORKING_DIR}:/home/jovyan/work
         - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
         - ${LOCAL_MODULES}:/home/jovyan/work/modules
         - ${LOCAL_SSL_CERTS}:/etc/ssl/notebook
+      environment:
+        NB_USER: "heap"
+        CHOWN_HOME: "yes"
+        GEN_CERT: "yes"
       ports:
         - ${PORT}:8888
